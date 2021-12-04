@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 import java.time.format.DateTimeFormatter;
 
-@Configuration
+//@Configuration
 public class DateTimeConfig extends WebMvcConfigurationSupport {
 
     @Bean
