@@ -30,9 +30,8 @@ public class NytCountsController {
     public @ResponseBody Iterable<NytCounts> getAllByStateAndDate(
             @PathVariable String state,
             @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm:ssZ") @PathVariable Date date) {
+
         log.info("Searching for all records on {}", date);
-        //date = new Date(120, 1, 20, 0, 0,0);
-        log.info("Using {}", date);
         return nytCountsRepository.findAllByStateAndDate(state, date);
     }
 
