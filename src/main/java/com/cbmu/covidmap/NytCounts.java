@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,7 +16,8 @@ public class NytCounts {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    //@DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm:ssZ")
+    @Temporal(TemporalType.DATE)
     private Date date;
 
     private String county;

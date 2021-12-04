@@ -1,7 +1,5 @@
 package com.cbmu.covidmap;
 
-import com.cbmu.covidmap.User;
-import com.cbmu.covidmap.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

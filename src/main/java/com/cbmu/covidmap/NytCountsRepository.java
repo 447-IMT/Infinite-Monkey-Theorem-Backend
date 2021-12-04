@@ -11,5 +11,5 @@ import java.util.List;
 // CRUD refers Create, Read, Update, Delete
 
 public interface NytCountsRepository extends CrudRepository<NytCounts, Integer> {
-    List<NytCounts> findAllByDate(Date date);
+    List<NytCounts> findAllByStateAndDate(String state, Date date);
 }
