@@ -16,7 +16,6 @@ public class NytCounts {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-    //@DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm:ssZ")
     @Temporal(TemporalType.DATE)
     private Date date;
 
