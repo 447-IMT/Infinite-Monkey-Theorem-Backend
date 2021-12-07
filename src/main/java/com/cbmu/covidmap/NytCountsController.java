@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Date;
 
 @Slf4j
 @Controller // This means that this class is a Controller
+@CrossOrigin(origins = "*") 
 @RequestMapping(path="/nyt-counts") // This means URL's start with /demo (after Application path)
 public class NytCountsController {
     @Autowired // This means to get the bean called userRepository

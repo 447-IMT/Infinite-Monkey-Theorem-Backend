@@ -10,6 +10,7 @@ import java.util.Date;
 
 @Slf4j
 @Controller // This means that this class is a Controller
+@CrossOrigin(origins = "*") 
 @RequestMapping(path="/national-counts") // This means URL's start with /demo (after Application path)
 public class NationalCountsController {
     @Autowired // This means to get the bean called userRepository
