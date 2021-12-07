@@ -26,7 +26,6 @@ public class DateTimeConvert implements Converter<String, Date> {
 
     @Override
     public Date convert(String dateString) {
-        log.info("Converting date: {}", dateString);
         TimeZone.setDefault(TimeZone.getTimeZone(ZoneId.of("UTC")));
 
         try {

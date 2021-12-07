@@ -29,8 +29,6 @@ public class CaliHistoricalFacilityCountsController {
     @GetMapping(path = "/date/{date}")
     public @ResponseBody Iterable<CaliHistoricalFacilityCounts> getAllByDate(
             @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm:ssZ") @PathVariable Date date) {
-
-        log.info("Searching for all records on {}", date);
         return caliHistoricalFacilityCountsRepository.findAllByDate(date);
     }
 }
