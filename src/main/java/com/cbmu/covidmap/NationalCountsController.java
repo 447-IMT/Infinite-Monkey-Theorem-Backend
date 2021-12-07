@@ -1,12 +1,14 @@
 package com.cbmu.covidmap;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
-
+@Slf4j
 @Controller // This means that this class is a Controller
 @RequestMapping(path="/national-counts") // This means URL's start with /demo (after Application path)
 public class NationalCountsController {
@@ -22,7 +24,9 @@ public class NationalCountsController {
     }
 
     @GetMapping(path = "/date/{date}")
-    public @ResponseBody Iterable<NationalCounts> getAllByDate(@PathVariable Date date) {
+    public @ResponseBody Iterable<NationalCounts> getAllByDate(
+        @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm:ssZ") @PathVariable Date date) {
+        log.info("Querying national counts by date: {}", date);
         return nationalCountsRepository.findAllByDate(date);
     }
 
