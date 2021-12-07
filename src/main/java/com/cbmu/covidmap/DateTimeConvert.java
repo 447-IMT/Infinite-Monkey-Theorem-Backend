@@ -26,8 +26,8 @@ public class DateTimeConvert implements Converter<String, Date> {
 
     @Override
     public Date convert(String dateString) {
+        log.info("Converting date: {}", dateString);
         TimeZone.setDefault(TimeZone.getTimeZone(ZoneId.of("UTC")));
-
 
         try {
             return Date.from(Instant.parse(dateString));
@@ -36,6 +36,5 @@ public class DateTimeConvert implements Converter<String, Date> {
             log.error(e.getMessage(), e);
             return null;
         }
-
     }
 }

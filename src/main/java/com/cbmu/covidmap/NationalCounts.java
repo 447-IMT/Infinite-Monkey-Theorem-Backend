@@ -12,7 +12,7 @@ public class NationalCounts {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date date;
 
     private String measure;
