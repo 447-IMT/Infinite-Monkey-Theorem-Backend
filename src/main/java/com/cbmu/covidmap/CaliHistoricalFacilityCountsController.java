@@ -2,11 +2,13 @@ package com.cbmu.covidmap;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @Controller // This means that this class is a Controller
@@ -27,6 +29,20 @@ public class CaliHistoricalFacilityCountsController {
     @GetMapping(path = "/date/{date}")
     public @ResponseBody Iterable<CaliHistoricalFacilityCounts> getAllByDate(
             @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm:ssZ") @PathVariable Date date) {
+        List<CaliHistoricalFacilityCounts> counts = caliHistoricalFacilityCountsRepository.findAllByDate(date);
+
+        if (! counts.isEmpty()) {
+            return counts;
+        }
+
+        Sort sort = Sort.by(Sort.Direction.DESC, "date");
+        List<DateOnly> dates = caliHistoricalFacilityCountsRepository.findAllByDateBefore(date, sort);
+
+        if (dates.isEmpty()) {
+            return counts;
+        }
+
+        date = dates.get(0).getDate();
         return caliHistoricalFacilityCountsRepository.findAllByDate(date);
     }
 }
