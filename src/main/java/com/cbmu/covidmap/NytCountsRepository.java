@@ -1,5 +1,6 @@
 package com.cbmu.covidmap;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Date;
@@ -12,4 +13,5 @@ import java.util.List;
 
 public interface NytCountsRepository extends CrudRepository<NytCounts, Integer> {
     List<NytCounts> findAllByStateAndDate(String state, Date date);
+    List<DateOnly> findAllByStateAndDateBefore(String state, Date date, Sort sort);
 }

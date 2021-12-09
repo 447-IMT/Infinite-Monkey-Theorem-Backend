@@ -2,6 +2,7 @@ package com.cbmu.covidmap;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @Controller // This means that this class is a Controller
@@ -29,12 +31,29 @@ public class NytCountsController {
     }
 
     @GetMapping(path = "/state/{state}/date/{date}")
-    public @ResponseBody Iterable<NytCounts> getAllByStateAndDate(
+    public @ResponseBody List<NytCounts> getAllByStateAndDate(
             @PathVariable String state,
             @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm:ssZ") @PathVariable Date date) {
 
         log.info("Searching for all records on {}", date);
+        List<NytCounts> counts = nytCountsRepository.findAllByStateAndDate(state, date);
+
+
+        if (! counts.isEmpty()) {
+            return counts;
+        }
+
+        Sort sort = Sort.by(Sort.Direction.DESC, "date");
+        List<DateOnly> dates = nytCountsRepository.findAllByStateAndDateBefore(state, date, sort);
+
+        if (dates.isEmpty()) {
+            return counts;
+        }
+
+        date = dates.get(0).getDate();
         return nytCountsRepository.findAllByStateAndDate(state, date);
+
+
     }
 
 
